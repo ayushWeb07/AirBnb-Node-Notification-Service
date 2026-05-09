@@ -1,10 +1,13 @@
 import { serverConfig } from "./index.ts";
 import Redis from "ioredis";
+import { logger } from "./logger.config.ts";
 
 class RedisConnection {
 	private static conn: Redis | null = null;
 
-	private constructor() {}
+	private constructor() {
+		logger.info("Initiating Redis connection...");
+	}
 
 	public static getConn(): Redis {
 		if (!RedisConnection.conn) {

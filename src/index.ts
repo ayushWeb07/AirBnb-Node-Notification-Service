@@ -5,6 +5,8 @@ import { errorHandler } from "./middlewares/error.middleware.ts";
 import { attachCorrelationId } from "./middlewares/correlation.middleware.ts";
 import { logger } from "./config/logger.config.ts";
 import { setupEmailWorker } from "./workers/mailer.worker.ts";
+import type { AddEmailDto } from "./dtos/mailer.dto.ts";
+import { addEmailToQueue } from "./producers/mailer.producer.ts";
 
 // config app
 const app = express();
@@ -20,7 +22,21 @@ app.use("/api/v1", v1Router);
 app.use(errorHandler);
 
 // spin up the server
-app.listen(serverConfig.PORT, () => {
+app.listen(serverConfig.PORT, async () => {
 	logger.info(`Server listening on http://localhost:${serverConfig.PORT}`);
 	setupEmailWorker();
+	logger.info(`Successfully completed the mailer worker setup`);
+
+	// add an email notification to the queue
+	const email: AddEmailDto = {
+		toMailAddress: "john@gmail.com",
+		subject: "Thanks for purchase",
+		templateId: "temp-101",
+		params: {
+			userName: "johnDoe",
+			userId: "user-909",
+		},
+	};
+
+	await addEmailToQueue(email);
 });

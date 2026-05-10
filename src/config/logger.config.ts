@@ -35,6 +35,8 @@ const logger = winston.createLogger({
 	),
 
 	transports: [
+		new winston.transports.Console(),
+
 		// info + warn + error
 		new DailyRotateFile({
 			level: "info",

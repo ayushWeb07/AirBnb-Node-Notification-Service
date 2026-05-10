@@ -11,7 +11,7 @@ const setupEmailWorker = () => {
 			logger.info(`Processing the email for: ${JSON.stringify(job.data)}`);
 		},
 		{
-			connection: RedisConnection.getConn(),
+			connection: RedisConnection.getConnectionObject(),
 		},
 	);
 

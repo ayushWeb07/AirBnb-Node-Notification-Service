@@ -11,7 +11,7 @@ interface ServerConfig {
 }
 
 const serverConfig: ServerConfig = {
-	PORT: Number(process.env.PORT) ?? 3000,
+	PORT: Number(process.env.PORT) || 3000,
 	REDIS_SERVER_HOST: process.env.REDIS_SERVER_HOST || "localhost",
 	REDIS_SERVER_PORT: Number(process.env.REDIS_SERVER_PORT) || 6379,
 	BULLMQ_MAILER_QUEUE_NAME:

@@ -4,7 +4,7 @@ import { logger } from "../config/logger.config.ts";
 
 const mailerPayloadName = "payload:mailer";
 
-const addEmail = async (payload: AddEmailDto) => {
+const addEmailToQueue = async (payload: AddEmailDto) => {
 	try {
 		await mailerQueue.add(mailerPayloadName, payload);
 		logger.info(
@@ -15,4 +15,4 @@ const addEmail = async (payload: AddEmailDto) => {
 	}
 };
 
-export { mailerPayloadName, addEmail };
+export { mailerPayloadName, addEmailToQueue };

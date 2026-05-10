@@ -1,10 +1,9 @@
 import { Queue } from "bullmq";
 import { RedisConnection } from "../config/redis.config.ts";
+import {serverConfig} from "../config/index.ts";
 
-const mailerQueueName = "queue:mailer";
-
-const mailerQueue = new Queue(mailerQueueName, {
+const mailerQueue = new Queue(serverConfig.BULLMQ_MAILER_QUEUE_NAME, {
 	connection: RedisConnection.getConn(),
 });
 
-export { mailerQueueName, mailerQueue };
+export { mailerQueue };

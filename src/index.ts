@@ -3,6 +3,8 @@ import { serverConfig } from "./config/index.ts";
 import v1Router from "./routers/v1/index.router.ts";
 import { errorHandler } from "./middlewares/error.middleware.ts";
 import { attachCorrelationId } from "./middlewares/correlation.middleware.ts";
+import { logger } from "./config/logger.config.ts";
+import { setupEmailWorker } from "./workers/mailer.worker.ts";
 
 // config app
 const app = express();
@@ -19,5 +21,6 @@ app.use(errorHandler);
 
 // spin up the server
 app.listen(serverConfig.PORT, () => {
-	console.log(`Server listening on http://localhost:${serverConfig.PORT}`);
+	logger.info(`Server listening on http://localhost:${serverConfig.PORT}`);
+	setupEmailWorker();
 });

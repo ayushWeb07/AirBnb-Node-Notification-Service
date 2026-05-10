@@ -15,9 +15,9 @@ const serverConfig: ServerConfig = {
 	REDIS_SERVER_HOST: process.env.REDIS_SERVER_HOST || "localhost",
 	REDIS_SERVER_PORT: Number(process.env.REDIS_SERVER_PORT) || 6379,
 	BULLMQ_MAILER_QUEUE_NAME:
-		process.env.BULLMQ_MAILER_QUEUE_NAME || "queue:mailer",
+		process.env.BULLMQ_MAILER_QUEUE_NAME || "queue-mailer",
 	BULLMQ_MAILER_PAYLOAD_NAME:
-		process.env.BULLMQ_MAILER_PAYLOAD_NAME || "payload:mailer",
+		process.env.BULLMQ_MAILER_PAYLOAD_NAME || "payload-mailer",
 	BULLMQ_MAILER_ADD_EMAIL_ATTEMPTS:
 		Number(process.env.BULLMQ_MAILER_ADD_EMAIL_ATTEMPTS) || 3,
 	BULLMQ_MAILER_ADD_EMAIL_DELAY:

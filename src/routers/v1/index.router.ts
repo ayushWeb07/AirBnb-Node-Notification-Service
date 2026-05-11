@@ -1,9 +1,9 @@
-import { Router } from "express"
-import userRouter from "./users.router.ts"
+import { Router } from "express";
+import userRouter from "./users.router.ts";
 
-const router= Router()
+const router = Router();
 
 // setup all app routes
-router.use("/users", userRouter)
+router.use("/users", userRouter);
 
-export default router
+export default router;

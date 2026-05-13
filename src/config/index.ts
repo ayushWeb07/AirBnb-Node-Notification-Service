@@ -7,9 +7,9 @@ interface ServerConfig {
 	BULLMQ_MAILER_QUEUE_NAME: string;
 	BULLMQ_MAILER_PAYLOAD_NAME: string;
 	BULLMQ_MAILER_ADD_EMAIL_ATTEMPTS: number;
-	BULLMQ_MAILER_QUEUE_NAME: string;
+	BULLMQ_MAILER_ADD_EMAIL_DELAY: number;
 	MAIL_USER_ADDRESS: string;
-	MAIL_APP_PASSWORD: number;
+	MAIL_APP_PASSWORD: string;
 }
 
 const serverConfig: ServerConfig = {

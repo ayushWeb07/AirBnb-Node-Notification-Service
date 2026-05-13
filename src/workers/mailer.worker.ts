@@ -10,6 +10,8 @@ const setupEmailWorker = async () => {
 	const emailWorker = new Worker(
 		serverConfig.BULLMQ_MAILER_QUEUE_NAME,
 		async (job: Job) => {
+			logger.info(`Processing the email...`);
+
 			const payload: AddEmailDto = job.data;
 
 			// get the email content
@@ -27,16 +29,7 @@ const setupEmailWorker = async () => {
 			};
 
 			// Send the email
-			gmailTransporter.sendMail(mailOptions, function (error, info) {
-				if (error) {
-					console.log("Error:", error);
-				} else {
-					console.log("Email sent: ", info.response);
-				}
-			});
-
-			// call the ext. email service
-			logger.info(`Processing the email for: ${JSON.stringify(job.data)}`);
+			await gmailTransporter.sendMail(mailOptions);
 		},
 		{
 			connection: RedisConnection.getConnectionObject(),
@@ -44,13 +37,14 @@ const setupEmailWorker = async () => {
 	);
 
 	emailWorker.on("completed", (job: Job) => {
-		logger.info(`Successfully sent the email: ${JSON.stringify(job.data)}`);
+		const payload: AddEmailDto = job.data;
+		logger.info(`Successfully sent the email to ${payload.toMailAddress} with template id: ${payload.templateId}`);
 	});
 
 	emailWorker.on(
 		"failed",
 		(job: Job | undefined, error: Error, prev: string) => {
-			logger.error(`Failed to send the email: ${error}`);
+			throw error
 		},
 	);
 };

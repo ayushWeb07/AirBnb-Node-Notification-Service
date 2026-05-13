@@ -7,6 +7,8 @@ const setupEmailWorker = () => {
 	const emailWorker = new Worker(
 		serverConfig.BULLMQ_MAILER_QUEUE_NAME,
 		async (job: Job) => {
+			job.data;
+
 			// call the ext. email service
 			logger.info(`Processing the email for: ${JSON.stringify(job.data)}`);
 		},

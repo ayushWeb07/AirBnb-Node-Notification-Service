@@ -7,7 +7,9 @@ interface ServerConfig {
 	BULLMQ_MAILER_QUEUE_NAME: string;
 	BULLMQ_MAILER_PAYLOAD_NAME: string;
 	BULLMQ_MAILER_ADD_EMAIL_ATTEMPTS: number;
-	BULLMQ_MAILER_ADD_EMAIL_DELAY: number;
+	BULLMQ_MAILER_QUEUE_NAME: string;
+	MAIL_USER_ADDRESS: string;
+	MAIL_APP_PASSWORD: number;
 }
 
 const serverConfig: ServerConfig = {
@@ -22,6 +24,8 @@ const serverConfig: ServerConfig = {
 		Number(process.env.BULLMQ_MAILER_ADD_EMAIL_ATTEMPTS) || 3,
 	BULLMQ_MAILER_ADD_EMAIL_DELAY:
 		Number(process.env.BULLMQ_MAILER_ADD_EMAIL_DELAY) || 1000,
+	MAIL_USER_ADDRESS: process.env.MAIL_USER_ADDRESS || "",
+	MAIL_APP_PASSWORD: process.env.MAIL_APP_PASSWORD || "",
 };
 
 export { serverConfig };

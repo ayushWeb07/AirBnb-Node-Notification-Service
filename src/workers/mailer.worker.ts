@@ -38,13 +38,15 @@ const setupEmailWorker = async () => {
 
 	emailWorker.on("completed", (job: Job) => {
 		const payload: AddEmailDto = job.data;
-		logger.info(`Successfully sent the email to ${payload.toMailAddress} with template id: ${payload.templateId}`);
+		logger.info(
+			`Successfully sent the email to ${payload.toMailAddress} with template id: ${payload.templateId}`,
+		);
 	});
 
 	emailWorker.on(
 		"failed",
 		(job: Job | undefined, error: Error, prev: string) => {
-			throw error
+			throw error;
 		},
 	);
 };

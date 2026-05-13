@@ -3,6 +3,11 @@ import fs from "fs/promises";
 import { InternalServerError } from "../utils/errors/app.error.ts";
 import { logger } from "../config/logger.config.ts";
 import Handlebars from "handlebars";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const renderTemplateContent = async (
 	templateId: string,
